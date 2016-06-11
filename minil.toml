@@ -1,0 +1,4 @@
+name = "My-HelloWorld-XS"
+# badges = ["travis"]
+module_maker="ModuleBuildTiny"
+
