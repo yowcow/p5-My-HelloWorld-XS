@@ -32,3 +32,5 @@ MYMETA.*
 /My-HelloWorld-XS-*
 lib/My/HelloWorld/XS.c
 !lib/My/HelloWorld/ppport.h
+
+/src/bit-test

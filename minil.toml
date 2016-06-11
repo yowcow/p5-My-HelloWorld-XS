@@ -1,4 +1,5 @@
 name = "My-HelloWorld-XS"
-# badges = ["travis"]
-module_maker="ModuleBuildTiny"
+badges = ["travis"]
 
+module_maker = "ModuleBuild"
+c_source = ["src"]

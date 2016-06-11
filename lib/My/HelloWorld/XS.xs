@@ -13,14 +13,75 @@ extern "C" {
 
 #define NEED_newSVpvn_flags
 #include "ppport.h"
+#include "bit.h"
+
+// hogefuga
 
 MODULE = My::HelloWorld::XS    PACKAGE = My::HelloWorld::XS
 
 PROTOTYPES: DISABLE
 
 void
-hello()
-CODE:
+is_even(...)
+PPCODE:
 {
-    ST(0) = newSVpvs_flags("Hello, world!", SVs_TEMP);
+    if (items != 1) {
+        croak("Invalid argument count: %d", items);
+    }
+
+    SV* input = ST(0);
+    IV ret = (SvIV(input)% 2) == 0;
+
+    XPUSHs(sv_2mortal(newSViv(ret)));
+
+    XSRETURN(1);
 }
+
+void
+hello()
+PPCODE:
+{
+    // Should be faster than returning char*
+    XPUSHs(newSVpvs_flags("Hello, world!", SVs_TEMP));
+    XSRETURN(1);
+}
+
+char*
+hello_retval()
+CODE:
+    // Should be slower than directly returning SV*
+    SV* out = newSVpvs_flags("Hello, world!", SVs_TEMP);
+    RETVAL = SvPV_nolen(out);
+OUTPUT:
+    RETVAL
+
+void
+sum(...)
+PPCODE:
+{
+    if (items != 2) {
+        croak("Invalid argument count: %d", items);
+    }
+
+    SV* a = ST(0);
+    SV* b = ST(1);
+
+    IV ret = SvIV(a) + SvIV(b);
+
+    XPUSHs(sv_2mortal(newSViv(ret)));
+
+    XSRETURN(1);
+}
+
+void
+bits(...)
+PPCODE:
+    if (items != 1) {
+        croak("Invalid argument count: %d", items);
+    }
+
+    IV ret = count_bits(SvIV(ST(0)));
+
+    XPUSHs(sv_2mortal(newSViv(ret)));
+
+    XSRETURN(1);

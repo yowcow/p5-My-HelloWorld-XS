@@ -1,0 +1,2 @@
+-I blib/arch
+-I blib/lib
