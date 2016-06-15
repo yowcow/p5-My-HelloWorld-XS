@@ -19,6 +19,10 @@ int is_even(int v) {
     return (v % 2) == 0;
 }
 
+int sum(int a, int b) {
+    return a + b;
+}
+
 MODULE = My::HelloWorld::XS    PACKAGE = My::HelloWorld::XS
 
 PROTOTYPES: DISABLE
@@ -68,7 +72,7 @@ PPCODE:
     SV* a = ST(0);
     SV* b = ST(1);
 
-    IV ret = SvIV(a) + SvIV(b);
+    IV ret = sum(SvIV(a), SvIV(b));
 
     XPUSHs(sv_2mortal(newSViv(ret)));
 
