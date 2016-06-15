@@ -1,4 +1,4 @@
-
+[![Build Status](https://travis-ci.org/yowcow/p5-My-HelloWorld-XS.svg?branch=master)](https://travis-ci.org/yowcow/p5-My-HelloWorld-XS)
 # NAME
 
 My::HelloWorld::XS - It's new $module
