@@ -15,7 +15,9 @@ extern "C" {
 #include "ppport.h"
 #include "bit.h"
 
-// hogefuga
+int is_even(int v) {
+    return (v % 2) == 0;
+}
 
 MODULE = My::HelloWorld::XS    PACKAGE = My::HelloWorld::XS
 
@@ -30,7 +32,7 @@ PPCODE:
     }
 
     SV* input = ST(0);
-    IV ret = (SvIV(input)% 2) == 0;
+    IV ret = is_even(SvIV(input));
 
     XPUSHs(sv_2mortal(newSViv(ret)));
 
